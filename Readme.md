@@ -73,3 +73,34 @@ Finally, the "network_mode" property sets the networking mode to "host" so that 
 For more information about nginx read this: [Nginx config](./nginx/sites-enabled/Readme.md)
 
 To produce certification files using openssl read this: [Certifications](./nginx/certs/Readme.md)
+
+\
+
+\
+## Essential Security Measures to Secure Your Nginx and SSL Configurations
+
+
+
+**1. Strong Passwords**\
+  Use strong passwords for all user accounts, including the root account. A strong password should be at least 8 characters long and contain a combination of uppercase and lowercase letters, numbers, and symbols.
+
+**2.    Firewall Rules**\
+    Configure firewall rules to block all incoming traffic by default and only allow traffic that is necessary for your applications to function properly. You can use iptables or UFW (Uncomplicated Firewall) to set up firewall rules.
+
+**3.    Configure SSL**\
+    Make sure to use SSL (Secure Sockets Layer) to encrypt data transmitted between the client and server. You can use Let’s Encrypt, a free, automated, and open Certificate Authority, to obtain SSL certificates for your domain.
+
+**4.    Disable Unnecessary Modules**\
+    By disabling unnecessary modules in your Nginx configuration, you reduce the attack surface of your server. Check your Nginx installation for any unnecessary modules and disable them.
+
+**5.  Regularly Update Nginx and SSL Configuration**\
+    Keep your Nginx and SSL configurations up-to-date with the latest security patches and updates. This will help prevent potential vulnerabilities from being exploited.
+
+**6.  Use Secure Protocols**\
+    Use TLS (Transport Layer Security) 1.2 or higher instead of SSLv2 or SSLv3 which are known to have serious security vulnerabilities.
+
+**7.  Enable HSTS**\
+    HTTP Strict Transport Security (HSTS) instructs web browsers to use HTTPS instead of HTTP, even if the user types "http" in the browser address bar. This helps protect against man-in-the-middle attacks and other security threats.
+
+**8.  Implement Rate Limiting**\
+    Implement rate limiting to prevent brute-force attacks and DDoS attacks. This limits the number of requests a user or IP address can make within a certain time period.
