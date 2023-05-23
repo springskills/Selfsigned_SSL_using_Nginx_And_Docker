@@ -74,12 +74,10 @@ For more information about nginx read this: [Nginx config](./nginx/sites-enabled
 
 To produce certification files using openssl read this: [Certifications](./nginx/certs/Readme.md)
 
-\
 
-\
+
+
 ## Essential Security Measures to Secure Your Nginx and SSL Configurations
-
-
 
 **1. Strong Passwords**\
   Use strong passwords for all user accounts, including the root account. A strong password should be at least 8 characters long and contain a combination of uppercase and lowercase letters, numbers, and symbols.
@@ -104,3 +102,80 @@ To produce certification files using openssl read this: [Certifications](./nginx
 
 **8.  Implement Rate Limiting**\
     Implement rate limiting to prevent brute-force attacks and DDoS attacks. This limits the number of requests a user or IP address can make within a certain time period.
+    
+
+## what is HSTS
+**HTTP Strict Transport Security (HSTS)** is a security feature that allows a website to instruct web browsers to only communicate with the site over secure HTTPS connections, instead of allowing HTTP connections.
+
+When a website uses HSTS, it sends a special response header to the client indicating that all future requests to the site should be made using HTTPS for a defined period of time. This can help protect users from various types of attacks such as man-in-the-middle (MITM) attacks, which can intercept and modify traffic between a user's browser and a website.
+
+Enabling HSTS helps to ensure that a website is accessed securely, even if a user forgets to include "https://" in the URL or manually enters "http://" instead. It also prevents downgrade attacks where an attacker tries to force a client to switch from HTTPS to HTTP, potentially exposing sensitive information.
+
+Overall, HSTS is a useful security mechanism that can help prevent various forms of attacks against web applications and improve the overall security posture of a website.
+
+
+### Enable HSTS in nginx
+Enabling HTTP Strict Transport Security (HSTS) in nginx is a relatively straightforward process that involves adding a few lines of configuration to your nginx server block. Here are the steps:
+
+1.  Open your nginx configuration file. On Ubuntu and Debian systems, this is typically located at `/etc/nginx/nginx.conf`.
+
+2.  Locate the `server` block for the domain you want to enable HSTS for.
+
+3.  Add the following lines inside the `server` block:
+```
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+```
+
+This line of code sets the HSTS header to be sent to the client, with a max-age value of one year (31536000 seconds). The `includeSubDomains` parameter tells the browser to also apply HSTS to any subdomains of your site.
+
+4.  Save the configuration file and reload nginx using the command:
+
+```sh
+sudo service nginx reload
+```
+
+That's it! Your site should now be using HSTS to enforce HTTPS connections.
+
+### Example
+Let's say you have a domain called `example.com` and your nginx configuration file is located at `/etc/nginx/nginx.conf`. You want to enable HSTS for this domain with a max-age value of one year.
+
+1.  Open the configuration file in your preferred text editor:
+
+```
+sudo nano /etc/nginx/nginx.conf
+```
+
+2.  Locate the `server` block for `example.com`. It should look something like this:
+
+```
+server {
+    listen 80;
+    server_name example.com;
+    ...
+}
+```
+
+3.  Add the following line inside the `server` block, just below the `server_name` directive:
+
+```
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+```
+
+Your `server` block should now look like this:
+
+```sh
+server {
+    listen 80;
+    server_name example.com;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    ...
+}
+```
+
+4.  Save the configuration file and reload nginx using the command:
+
+```
+sudo service nginx reload
+```
+
+That's it! Your site at `example.com` should now be using HSTS to enforce HTTPS connections, with a max-age value of one year.
