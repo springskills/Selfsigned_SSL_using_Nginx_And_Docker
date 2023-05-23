@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:stable
+    container_name: 'nginx'
+    restart: always
+#    ports:
+#      - 80:80
+#      - 443:443
+    volumes:
+      - ./nginx/sites-enabled/default.conf:/etc/nginx/conf.d/ssl.conf
+      - ./nginx/certs/:/etc/nginx/certs
+    network_mode: "host"
+
+  #Varnish cache *******************
+  varnish:
+    image: varnish:stable
+    container_name: varnish
+    volumes:
+      - "./varnish/default.vcl:/etc/varnish/default.vcl"
+    ports:
+      - "9090:80"
+    tmpfs:
+      - /var/lib/varnish:exec
+    environment:
+      - VARNISH_SIZE=80G
