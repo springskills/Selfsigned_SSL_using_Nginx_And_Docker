@@ -43,7 +43,7 @@ the `$host` value.
 
 Similarly, `proxy_set_header X-Real-IP IP;`
 sets the X-Real-IP header of the HTTP request to the IP address 
-`192.168.100.111`. 
+`192.168.1.10`. 
 
 These headers can be useful for passing 
 additional information to the backend server or modifying the request 
