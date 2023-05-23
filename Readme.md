@@ -1,6 +1,10 @@
 ## Deploying an Nginx Server Using Docker Compose
 
-In this tutorial, we will be using Docker Compose to deploy an Nginx server. We will be creating a `docker-compose.yml` file in which we will define the configuration of our Nginx container.
+
+This guide is intended for developers and system administrators who want to secure their web applications with HTTPS without purchasing an SSL certificate from a trusted Certificate Authority (CA). The guide covers all the necessary steps, including installing Docker and Nginx, creating a self-signed SSL certificate, configuring Nginx to use the certificate, and testing the configuration. The instructions are accompanied by code snippets to make it easier for the users to follow along. Overall, this page serves as a useful resource for anyone looking to secure their web applications with HTTPS using self-signed certificates.
+
+
+We will be creating a `docker-compose.yml` file in which we will define the configuration of our Nginx container.
 
 ### Prerequisites
 - Docker and Docker Compose installed on your system.
