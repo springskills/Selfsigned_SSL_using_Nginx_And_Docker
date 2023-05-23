@@ -17,7 +17,9 @@ server_name 192.168.1.10;
 
     ssl_certificate /etc/nginx/certs/certificate.crt;
     ssl_certificate_key /etc/nginx/certs/private.key;
-
+    
+    ssl_protocols TLSv1.2 TLSv1.3;
+    
     location / {
         proxy_pass http://192.168.1.10:9000;
         #proxy_set_header Host $host;
@@ -44,6 +46,8 @@ the `$host` value.
 Similarly, `proxy_set_header X-Real-IP IP;`
 sets the X-Real-IP header of the HTTP request to the IP address 
 `192.168.1.10`. 
+
+The `ssl_protocols` directive specifies the minimum and maximum SSL/TLS protocol versions that nginx should support. In this case, we're allowing `TLS` versions `1.2` and `1.3`.
 
 These headers can be useful for passing 
 additional information to the backend server or modifying the request 
