@@ -1,9 +1,9 @@
-The first server block listens on port 80 and redirects all HTTP traffic to HTTPS using a 301 redirect. The other server block listens on port 443 with SSL enabled, and proxies incoming requests to a backend server running on http://1IP:PORT.
+The first server block listens on port 80 and redirects all HTTP traffic to HTTPS using a 301 redirect. The other server block listens on port 443 with SSL enabled, and proxies incoming requests to a backend server running on http://192.168.1.10:9000.
 
 ```shell
 server {
   listen 80 default_server;	    
-  server_name 192.168.100.111;
+  server_name 192.168.1.10;
   return 301 https://$host$request_uri;
 }
 ```
@@ -13,15 +13,15 @@ This block specifies that the server should listen on `port 80` as the default s
 ```shell
 server {
 listen 443 ssl;
-server_name IP;
+server_name 192.168.1.10;
 
     ssl_certificate /etc/nginx/certs/certificate.crt;
     ssl_certificate_key /etc/nginx/certs/private.key;
 
     location / {
-        proxy_pass http://IP:PORT;
+        proxy_pass http://192.168.1.10:9000;
         #proxy_set_header Host $host;
-        #proxy_set_header X-Real-IP IP;
+        #proxy_set_header X-Real-IP 192.168.1.10;
         #proxy_set_header X-Forwarded-Proto https;
         #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         #proxy_redirect off;
